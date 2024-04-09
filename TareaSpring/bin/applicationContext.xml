@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+">
+
+<context:property-placeholder location="classpath:datosEmpresa.propiedades"/>
+
+
+<!-- creacion de la dependencia -->
+<bean id="miInforme" class="com.app.spring.Informe"></bean>
+
+
+<!-- Bean con constructor, No puede haber dos beans con el mismo nombre -->
+<bean id="miEmpleado" class="com.app.spring.DirectorEmpleado">
+
+	<constructor-arg ref="miInforme"></constructor-arg>
+	
+	<property name="email" value="${email}"></property>
+	
+	<property name="nombreEmpresa" value="${nombreEmpresa}"></property>
+</bean>
+
+
+<!-- bean con setter -->
+<bean id="miSecretarioEmpleado" class="com.app.spring.SecretarioEmpleado">
+
+	<!-- El name tiene que ser el mismo que le damos al setter sin set primera letra en minuscula -->
+	<property name ="informeNuevo" ref="miInforme"></property>
+	
+	<!-- se usa value para darle un valor al string email y nombre empresa -->
+	<property name="email" value="secretaria@gmail.com"></property>
+	
+	<property name="nombreEmpresa" value="Eviden"></property>
+</bean>
+
+
+
+</beans>
